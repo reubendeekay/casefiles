@@ -24,3 +24,24 @@ h1,
 h3 {
   font-weight: 500;
 }
+:root {
+  --background: #f7f7f7;
+  --text-primary: #1a1a1a;
+  --text-secondary: #777e89;
+  --line-border: #e7e7e7;
+  --button: #03c9d7;
+  --sidebar-background: #fff;
+  --sidebar-links-hover: #f2f0f1;
+  --nav-svg: #949db2;
+  --profit: #00c292;
+  --loss: #e46a76;
+}
+[data-theme="dark"] {
+  --background: #1a1a1a;
+  --text-primary: #f5f7f7;
+  --text-secondary: #9b8c8f;
+  --line-border: #2e3239;
+  --button: #03c9d7;
+  --sidebar-background: #282c34;
+  --nav-svg: #949db2;
+}

@@ -1,7 +1,16 @@
 import styled from "styled-components";
 import { FiArrowRight, FiMenu } from "react-icons/fi";
+import { useUser } from "@auth0/nextjs-auth0";
+import Image from "next/image";
+import { useStateContext } from "../lib/context";
+import ProfileCard from "./Profilecard";
+import { useRouter } from "next/router";
 
 const Nav = () => {
+  const { account, setAccount } = useStateContext();
+  const { user, error, isLoading } = useUser();
+  const router = useRouter();
+  const IMAGE_URL = "lh3.googleusercontent.com";
   return (
     <Container>
       <Menu>
@@ -18,12 +27,29 @@ const Nav = () => {
           <li>Blog</li>
         </ul>
       </Navlinks>
-      <Authdiv>
-        <button>
-          <p>Sign In</p>
-          <FiArrowRight />
-        </button>
-      </Authdiv>
+      {user ? (
+        <Userprofile>
+          <Image
+            src={
+              user.picture.includes(IMAGE_URL) ? user.picture : "/avatar.png"
+            }
+            alt="profile"
+            height={30}
+            width={30}
+            objectFit={"cover"}
+            onClick={() => setAccount(!account)}
+          />
+          <h3>| Hi, {user.nickname}</h3>
+        </Userprofile>
+      ) : (
+        <Authdiv>
+          <button onClick={() => router.push("/api/auth/login")}>
+            <p>Sign In</p>
+            <FiArrowRight />
+          </button>
+        </Authdiv>
+      )}
+      {account && <ProfileCard />}
     </Container>
   );
 };
@@ -106,5 +132,15 @@ const Menu = styled.div`
   }
   @media (max-width: 768px) {
     display: block;
+  }
+`;
+
+const Userprofile = styled.div`
+  align-self: center;
+  display: flex;
+  align-items: center;
+  img {
+    border-radius: 50%;
+    cursor: pointer;
   }
 `;
