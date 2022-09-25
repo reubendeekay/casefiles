@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Category {
+  id        String   @id @default(uuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Case      Case[]
+}
+
+model Court {
+  id        String   @id @default(uuid())
+  name      String
+  location  String
+  room      Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Case      Case[]
+}
+
+model Judge {
+  id        String   @id @default(uuid())
+  name      String
+  gender    Sex      @default(UNNAMED)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Case      Case[]
+}
+
+model Case {
+  id          String   @id @default(uuid())
+  caseNumber  String   @unique
+  caseName    String
+  caseDetails String
+  accused     String
+  plaintiff   String
+  caseFiles   Json
+  filingDate  DateTime
+  hearingDate DateTime
+  rulingDate  DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  categoryId  String
+  courtId     String
+  judgeId     String
+  category    Category @relation(fields: [categoryId], references: [id])
+  court       Court    @relation(fields: [courtId], references: [id])
+  judge       Judge    @relation(fields: [judgeId], references: [id])
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String?  @unique
+  image     String?
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum Sex {
+  MALE
+  FEMALE
+  UNNAMED
+}
