@@ -22,7 +22,6 @@ model Court {
   id        String   @id @default(uuid())
   name      String
   location  String
-  room      Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   Case      Case[]

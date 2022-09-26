@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useStateContext } from "../lib/context";
 import ProfileCard from "./Profilecard";
 import { useRouter } from "next/router";
+import toast, { Toaster } from "react-hot-toast";
 
 const Nav = () => {
   const { account, setAccount } = useStateContext();
@@ -16,13 +17,21 @@ const Nav = () => {
       <Menu>
         <FiMenu />
       </Menu>
-      <Logo>
+      <Logo onClick={() => router.push("/")}>
         <h1>Firmlytical</h1>
       </Logo>
       <Navlinks>
         <ul>
-          <li>Home</li>
-          <li>Caselaw</li>
+          <li onClick={() => router.push("/")}>Home</li>
+          <li
+            onClick={() =>
+              user
+                ? router.push("/cases")
+                : toast.error("You need to login to view the cases")
+            }
+          >
+            Caselaw
+          </li>
           <li>Courts</li>
           <li>Blog</li>
         </ul>
@@ -74,6 +83,7 @@ const Logo = styled.div`
     font-size: 3rem;
     font-weight: 700;
     font-family: "Ms Madi", cursive;
+    cursor: pointer;
   }
   @media (max-width: 768px) {
     h1 {
