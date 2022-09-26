@@ -33,7 +33,15 @@ const Nav = () => {
             Caselaw
           </li>
           <li>Courts</li>
-          <li>Blog</li>
+          <li
+            onClick={() =>
+              user
+                ? router.push("/create")
+                : toast.error("You need to login to view the cases")
+            }
+          >
+            Add Case
+          </li>
         </ul>
       </Navlinks>
       {user ? (

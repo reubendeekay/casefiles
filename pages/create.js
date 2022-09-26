@@ -283,15 +283,15 @@ export const getServerSideProps = async ({ req, res }) => {
     },
   });
 
-  if (user.role !== "ADMIN") {
-    return {
-      redirect: {
-        permanent: false,
-        destination: "/403",
-      },
-      props: {},
-    };
-  }
+  // if (user.role !== "ADMIN") {
+  //   return {
+  //     redirect: {
+  //       permanent: false,
+  //       destination: "/403",
+  //     },
+  //     props: {},
+  //   };
+  // }
 
   return {
     props: {},
