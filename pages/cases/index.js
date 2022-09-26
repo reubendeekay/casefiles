@@ -2,7 +2,7 @@ import Filter from "../../components/Filter";
 import styled from "styled-components";
 import { StyledTable } from "../../styles/casesStyles";
 
-const Index = ({ cases }) => {
+const Index = () => {
   return (
     <Container>
       <FilterWrapper>
@@ -21,7 +21,9 @@ const Index = ({ cases }) => {
             </tr>
           </thead>
           <tbody>
-            <h1>No data has been registered yet</h1>
+            <tr>
+              <td>No cases registered yet</td>
+            </tr>
           </tbody>
         </StyledTable>
       </Caseswrapper>
@@ -30,35 +32,6 @@ const Index = ({ cases }) => {
 };
 
 export default Index;
-
-export async function getServerSideProps() {
-  const cases = await prisma.case.findMany({
-    include: {
-      category: {
-        select: {
-          name: true,
-        },
-      },
-      judge: {
-        select: {
-          name: true,
-        },
-      },
-      court: {
-        select: {
-          name: true,
-          location: true,
-          room: true,
-        },
-      },
-    },
-  });
-  return {
-    props: {
-      cases: JSON.parse(JSON.stringify(cases)),
-    },
-  };
-}
 
 const Container = styled.div`
   display: flex;
