@@ -52,10 +52,10 @@ const Filter = () => {
 
   return (
     <Container ref={filterRef}>
-      <h1>Search Case</h1>
+      <h1>Filter Case</h1>
       <Styledform onSubmit={handleSubmit(onSubmit)}>
         <Styledinput>
-          <label>Case Number</label>
+          <label>Application Number</label>
           <input type="text" {...register("caseNumber")} />
         </Styledinput>
         <Styledinput>
@@ -63,38 +63,19 @@ const Filter = () => {
           <input type="text" {...register("caseName")} />
         </Styledinput>
         <Styledinput>
-          <label>Case Content</label>
-          <input type="text" {...register("caseContent")} />
-        </Styledinput>
-        <Styledinput>
-          <label>Parties</label>
+          <label>Party Names</label>
           <input type="text" {...register("parties")} />
         </Styledinput>
         <StyledDropdown>
-          <label>Judge</label>
+          <label>Quorum Chair</label>
           <select {...register("judge")}>
             <option value="">Select a Judge</option>
             <option value="7">John Doe</option>
             <option value="2">Jane Doe</option>
           </select>
         </StyledDropdown>
-        <StyledDropdown>
-          <label>Court</label>
-          <select {...register("court")}>
-            <option value="">Select a Court</option>
-            <option value="1">Supreme Court</option>
-            <option value="2">Court Of Appeal</option>
-            <option value="3">High court</option>
-            <option value="4">Environmnetal and Land Court</option>
-            <option value="5">Employment and Labour Relations court</option>
-          </select>
-        </StyledDropdown>
         <Styledinput>
-          <label>Filing date</label>
-          <input type="date" {...register("filingDate")} />
-        </Styledinput>
-        <Styledinput>
-          <label>Ruling date</label>
+          <label>Date of Delivery</label>
           <input type="date" {...register("rulingDate")} />
         </Styledinput>
         <StyledButton type="submit">Search Case</StyledButton>

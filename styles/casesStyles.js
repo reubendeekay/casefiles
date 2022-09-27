@@ -87,6 +87,7 @@ const SearchInput = styled.div`
 `;
 
 const StyledTable = styled.table`
+  background: white;
   min-width: 45rem;
   width: 100%;
   margin: 1rem 0rem;
@@ -119,6 +120,10 @@ const StyledTable = styled.table`
     tr {
       vertical-align: top;
       border-bottom: 1px solid #eaeaea;
+      cursor: pointer;
+      :hover {
+        background: #f4f6f8;
+      }
       td {
         padding: 16px 10px;
         text-align: left;

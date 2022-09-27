@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FiArrowRight, FiMenu } from "react-icons/fi";
+import { FiArrowRight, FiMenu, FiChevronDown } from "react-icons/fi";
 import { useUser } from "@auth0/nextjs-auth0";
 import Image from "next/image";
 import { useStateContext } from "../lib/context";
@@ -23,15 +23,19 @@ const Nav = () => {
       <Navlinks>
         <ul>
           <li onClick={() => router.push("/")}>Home</li>
+          <li>Statutes</li>
           <li
             onClick={() =>
               user
                 ? router.push("/cases")
                 : toast.error("You need to login to view the cases")
             }
+            style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}
           >
-            Caselaw
+            Decisions
+            <FiChevronDown />
           </li>
+<<<<<<< HEAD
           <li>Courts</li>
           <li
             onClick={() =>
@@ -42,6 +46,9 @@ const Nav = () => {
           >
             Add Case
           </li>
+=======
+          <li>PRA Law Reports</li>
+>>>>>>> c81bac3f2d772ae22a2880b05a3f7e1e7190ba8a
         </ul>
       </Navlinks>
       {user ? (
@@ -103,7 +110,7 @@ const Logo = styled.div`
 const Navlinks = styled.div`
   ul {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
     li {
       list-style: none;
       font-size: 1rem;

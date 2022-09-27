@@ -67,9 +67,9 @@ const Create = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    if (fileUrl.length === 0) {
-      return toast.error("Please upload a document before adding the case");
-    }
+    // if (fileUrl.length === 0) {
+    //   return toast.error("Please upload a document before adding the case");
+    // }
     const caseData = {
       accused: data.accused,
       caseName: data.caseName,
@@ -84,6 +84,7 @@ const Create = () => {
       rulingDate: data.rulingDate,
       caseFiles: fileUrl,
     };
+    console.log(caseData);
     reset();
   };
 
