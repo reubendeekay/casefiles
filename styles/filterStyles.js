@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-  background-color: var(--sidebar-background);
   box-shadow: rgb(0 0 0 / 31%) 0px 0px 1px 0px,
     rgb(0 0 0 / 25%) 0px 11px 20px -8px;
+    height: 100vh;
   h1 {
     font-size: 1.5rem;
     font-weight: 600;
@@ -27,7 +27,7 @@ const Container = styled.div`
 `;
 
 const Styledform = styled.form`
-  margin: -1rem 1rem 1rem 1rem;
+  /* margin: -1rem 1rem 1rem 1rem; */
   padding: 1rem;
   background: var(--sidebar-background);
   border-radius: 15px;
@@ -59,12 +59,11 @@ const Styledinput = styled.div`
     font-size: 1rem;
     margin-bottom: 10px;
     border: none;
-    border: 1px solid var(--line-border);
+    border: 3px solid var(--line-border);
     color: var(--text-secondary);
-    border-radius: 10px;
     outline: none;
     &:focus {
-      border: 1px solid #1ccaff;
+      border: 2px solid #1ccaff;
     }
   }
   div {
@@ -89,9 +88,9 @@ const StyledDropdown = styled.div`
     font-size: 1rem;
     margin-bottom: 20px;
     border: none;
-    border: 1px solid var(--line-border);
+    border: 3px solid var(--line-border);
     color: var(--text-secondary);
-    border-radius: 10px;
+    /* border-radius: 10px; */
     outline: none;
     background: none;
     &:focus {

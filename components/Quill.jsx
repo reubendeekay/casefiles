@@ -22,7 +22,6 @@ const Quill = () => {
       theme="snow"
       onChange={setValue}
       placeholder="Write Something Awesome..."
-      escapeHtml={true}
     />
   );
 };
