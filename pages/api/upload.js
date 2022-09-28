@@ -1,6 +1,5 @@
 import { nanoid } from "nanoid";
 import { decode } from "base64-arraybuffer";
-import { createClient } from "@supabase/supabase-js";
 import { supabase } from "../../lib/supabase";
 
 export default async function handler(req, res) {

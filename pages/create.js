@@ -20,7 +20,7 @@ import {
 } from "../styles/createStyles";
 import { MdCancel } from "react-icons/md";
 import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
-import prisma from "../lib/prisma";
+import { supabase } from "../lib/supabase";
 import toast from "react-hot-toast";
 import { FiX } from "react-icons/fi";
 import { useRouter } from "next/router";
@@ -305,33 +305,23 @@ export default Create;
 export const getServerSideProps = withPageAuthRequired({
   async getServerSideProps(context) {
     const session = getSession(context.req, context.res);
-    const user = await prisma.user.findUnique({
-      select: {
-        email: true,
-        role: true,
-      },
-      where: {
-        email: session.user.email,
-      },
-    });
-
-    // if (user.role !== "ADMIN") {
-    //   return {
-    //     redirect: {
-    //       permanent: false,
-    //       destination: "/403",
-    //     },
-    //     props: {},
-    //   };
-    // }
-
-    const judges = await prisma.judge.findMany({
-      select: {
-        id: true,
-        name: true,
-      },
-    });
-
+    const { data, error } = await supabase
+      .from("User")
+      .select("*")
+      .eq("email", session.user.email);
+    const { role } = data[0];
+    if (role !== "ADMIN") {
+      return {
+        redirect: {
+          permanent: false,
+          destination: "/403",
+        },
+        props: {},
+      };
+    }
+    const { data: judges, error: judgesError } = await supabase
+      .from("Judge")
+      .select("*");
     return {
       props: { judges },
     };
