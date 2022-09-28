@@ -27,7 +27,7 @@ const Index = ({ cases }) => {
         <Filter judges={cases} />
       </FilterWrapper>
       <Caseswrapper>
-        {user && (
+        {/* {user && (
           <Box>
             <Link href="/">
               <button>
@@ -48,7 +48,7 @@ const Index = ({ cases }) => {
               </button>
             </Link>
           </Box>
-        )}
+        )} */}
         <StyledTable>
           <thead>
             <tr>
@@ -86,7 +86,7 @@ const Index = ({ cases }) => {
                 </td>
                 <td>
                   <h3>
-                    Date Delivered:
+                    Delivery Date:
                     <span>
                       {new Date(caseItem.createdAt)
                         .toISOString()

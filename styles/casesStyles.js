@@ -95,6 +95,7 @@ const StyledTable = styled.table`
   border-spacing: 0px;
   thead {
     background: #f4f6f8;
+
     tr {
       border: none;
       outline: none;
