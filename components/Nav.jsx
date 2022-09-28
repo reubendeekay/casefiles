@@ -34,12 +34,16 @@ const Nav = () => {
             >
               Statutes <FiChevronDown />
             </span>
-            <ul>
-              <li>Link 1</li>
-              <li>Link 2</li>
-              <li>Link 3</li>
-              <li>Link 4</li>
-              <li>Link 5</li>
+            <ul style={
+              {
+                padding: "0.8rem",
+              }
+            }>
+              <li>Legal Notices</li>
+              <li>Ammendment Acts</li>
+              <li>The Constitution of Kenya</li>
+              <li>Laws of Kenya Database</li>
+              <li>FAQs</li>
             </ul>
           </Dropdown>
           <li onClick={() => router.push("/cases")}>Decisions</li>
@@ -49,7 +53,11 @@ const Nav = () => {
             >
               PRA Law Reports <FiChevronDown />
             </span>
-            <ul>
+            <ul style={
+              {
+                padding: "0.8rem 1rem",
+              }
+            }>
               <li>2010-2015</li>
               <li>2016-2017</li>
               <li>2018-2020</li>
@@ -94,7 +102,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #fffafa;
+  background: #f5f8fc;
   padding: 0rem 1rem;
   position: sticky;
   top: 0px;
@@ -120,12 +128,21 @@ const Logo = styled.div`
 const Navlinks = styled.div`
   ul {
     display: flex;
-    gap: 2rem;
+    gap: 5rem;
+
     li {
       list-style: none;
       font-size: 1rem;
       font-weight: 400;
       cursor: pointer;
+    }
+    li:hover {
+      color: #4269d4;
+      font-weight: 700;
+    }
+    li:active {
+      color: #4269d4;
+
     }
     @media (max-width: 768px) {
       display: none;
@@ -191,20 +208,23 @@ const Dropdown = styled.li`
     position: absolute;
     margin: 0;
     z-index: 5;
+
     flex-direction: column;
     gap: 0.2rem;
-    background: #fffafa;
-    border: 2px solid #5b5757;
+    background: #edf4ff;
+    // border: 2px solid #5b5757;
+    padding: 0.0rem 0.9rem;
     display: none;
   }
   li {
     list-style: none;
     font-size: 1rem;
-    font-weight: 400;
+    font-weight:500;
     cursor: pointer;
     padding: 0.5rem 1rem;
     display: inline-block;
     padding: 0.5rem 1rem;
-    text-transform: uppercase;
+    // text-transform: uppercase;
   }
+  
 `;

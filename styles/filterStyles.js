@@ -44,7 +44,7 @@ const Styledinput = styled.div`
     position: relative;
     top: 10px;
     left: 15px;
-    padding: 10px 5px;
+    padding: 5px 5px;
     font-size: 0.85rem;
     color: black;
     pointer-events: none;
@@ -60,6 +60,7 @@ const Styledinput = styled.div`
     margin-bottom: 10px;
     border: none;
     border: 1px solid var(--line-border);
+    border-radius: 5px;
     color: var(--text-secondary);
     outline: none;
     &:focus {
@@ -90,7 +91,7 @@ const StyledDropdown = styled.div`
     border: none;
     border: 1px solid var(--line-border);
     color: var(--text-secondary);
-    /* border-radius: 10px; */
+    border-radius: 5px;
     outline: none;
     background: none;
     &:focus {
