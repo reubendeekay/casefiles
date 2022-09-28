@@ -23,19 +23,36 @@ const Nav = () => {
       <Navlinks>
         <ul>
           <li onClick={() => router.push("/")}>Home</li>
-          <li>Statutes</li>
-          <li
-            onClick={() =>
-              user
-                ? router.push("/cases")
-                : toast.error("You need to login to view the cases")
-            }
-            style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}
-          >
-            Decisions
-            <FiChevronDown />
-          </li>
-          <li>PRA Law Reports</li>
+          <Dropdown>
+            <span
+              style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}
+            >
+              Statutes <FiChevronDown />
+            </span>
+            <ul>
+              <li>Link 1</li>
+              <li>Link 2</li>
+              <li>Link 3</li>
+              <li>Link 4</li>
+              <li>Link 5</li>
+            </ul>
+          </Dropdown>
+          <li onClick={() => router.push("/cases")}>Decisions</li>
+          <Dropdown>
+            <span
+              style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}
+            >
+              Statutes <FiChevronDown />
+            </span>
+            <li>
+              <ul>
+                <li>2010-2015</li>
+                <li>2016-2017</li>
+                <li>2018-2020</li>
+                <li>2021-2022</li>
+              </ul>
+            </li>
+          </Dropdown>
         </ul>
       </Navlinks>
       {user ? (
@@ -104,9 +121,9 @@ const Navlinks = styled.div`
       font-weight: 400;
       cursor: pointer;
     }
-  }
-  @media (max-width: 768px) {
-    display: none;
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 `;
 
@@ -154,5 +171,34 @@ const Userprofile = styled.div`
   img {
     border-radius: 50%;
     cursor: pointer;
+  }
+`;
+
+const Dropdown = styled.li`
+  &:hover,
+  &:focus {
+    ul {
+      display: flex;
+    }
+  }
+  ul {
+    position: absolute;
+    margin: 0;
+    z-index: 5;
+    flex-direction: column;
+    gap: 0.2rem;
+    background: #fffafa;
+    border: 2px solid #5b5757;
+    display: none;
+  }
+  li {
+    list-style: none;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
   }
 `;
