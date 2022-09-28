@@ -5,7 +5,14 @@ import Image from "next/image";
 import { supabase } from "../../lib/supabase";
 import { useUser } from "@auth0/nextjs-auth0";
 import Link from "next/link";
-import { FiPlusCircle, FiUser, FiFile } from "react-icons/fi";
+import {
+  FiPlusCircle,
+  FiUser,
+  FiFile,
+  FiDownload,
+  FiDownloadCloud,
+} from "react-icons/fi";
+import { MdFileDownload } from "react-icons/md";
 
 const Index = ({ cases }) => {
   console.log(cases);
@@ -79,11 +86,12 @@ const Index = ({ cases }) => {
                     <span>
                       {new Date(caseItem.createdAt)
                         .toISOString()
-                        .slice(0, 19)
-                        .replace("T", " ")}
+                        .slice(0, 11)
+                        .replace("T", " ")
+                        .replace("-", "/")}
                     </span>
                   </h3>
-                  <h3
+                  {/* <h3
                     style={{
                       fontWeight: "400",
                       fontSize: "1rem",
@@ -97,7 +105,24 @@ const Index = ({ cases }) => {
                     }}
                   >
                     pending
-                  </h3>
+                  </h3> */}
+                  <div
+                    style={{
+                      backgroundColor: "#38c983",
+                      padding: "0.5rem",
+                      maxWidth: "2rem",
+                      marginTop: "0.5rem",
+                      borderRadius: "30px",
+                      alignItems: "center",
+                      display: "flex",
+                    }}
+                  >
+                    <MdFileDownload
+                      style={{
+                        color: "#ffffff",
+                      }}
+                    />
+                  </div>
                 </td>
               </tr>
             ))}
@@ -171,8 +196,8 @@ const Box = styled.div`
       font-size: 1.5rem;
     }
     a {
-      font-size: 1rem;
-      font-weight: 600;
+      font-size: 16;
+      // font-weight: 600;
     }
   }
 `;

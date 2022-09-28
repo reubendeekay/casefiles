@@ -18,7 +18,12 @@ const Nav = () => {
         <FiMenu />
       </Menu>
       <Logo onClick={() => router.push("/")}>
-        <h1>Firmlytical</h1>
+        <img src="/logo.png" alt="logo" style={
+          {
+            maxHeight: "2.1rem",
+            marginTop: "1rem",
+          }
+        } />
       </Logo>
       <Navlinks>
         <ul>
