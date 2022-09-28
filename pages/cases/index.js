@@ -5,8 +5,19 @@ import Image from "next/image";
 import { supabase } from "../../lib/supabase";
 import { useUser } from "@auth0/nextjs-auth0";
 import Link from "next/link";
+<<<<<<< HEAD
 import { FiPlusCircle, FiUser, FiFile } from "react-icons/fi";
 import { useStateContext } from "../../lib/context";
+=======
+import {
+  FiPlusCircle,
+  FiUser,
+  FiFile,
+  FiDownload,
+  FiDownloadCloud,
+} from "react-icons/fi";
+import { MdFileDownload } from "react-icons/md";
+>>>>>>> 38a4648067c2c62bee5a1065b3351439f3f529c3
 
 const Index = ({ cases }) => {
   const { user } = useUser();
@@ -49,6 +60,7 @@ const Index = ({ cases }) => {
             </tr>
           </thead>
           <tbody>
+<<<<<<< HEAD
             {filteredCases.length > 0 &&
               filteredCases.map((caseItem, index) => (
                 <tr key={index}>
@@ -159,6 +171,80 @@ const Index = ({ cases }) => {
                   </td>
                 </tr>
               ))}
+=======
+            {cases.map((caseItem, index) => (
+              <tr key={index}>
+                <td>
+                  <h3>
+                    Application No:<span>{caseItem.caseNumber}</span>
+                  </h3>
+                  <h3>
+                    Case Subject:<span>{caseItem.caseSubject}</span>
+                  </h3>
+                </td>
+                <td>
+                  <h3>
+                    Plaintiff:<span>{caseItem.plaintiff}</span>
+                  </h3>
+                  <h3>
+                    Accused:<span>{caseItem.accused}</span>
+                  </h3>
+                  <h3>
+                    Chairs:
+                    <span>
+                      {Object.keys(caseItem.judgeId).map((key) => (
+                        <span key={key}>{caseItem.judgeId[key]}</span>
+                      ))}
+                    </span>
+                  </h3>
+                </td>
+                <td>
+                  <h3>
+                    Date Delivered:
+                    <span>
+                      {new Date(caseItem.createdAt)
+                        .toISOString()
+                        .slice(0, 11)
+                        .replace("T", " ")
+                        .replace("-", "/")}
+                    </span>
+                  </h3>
+                  {/* <h3
+                    style={{
+                      fontWeight: "400",
+                      fontSize: "1rem",
+                      padding: "0.1rem",
+                      backgroundColor: "#f5a6b6",
+                      color: "#d61326",
+                      borderRadius: "5px",
+                      maxWidth: "6rem",
+                      textAlign: "center",
+                      marginTop: "0.5rem",
+                    }}
+                  >
+                    pending
+                  </h3> */}
+                  <div
+                    style={{
+                      backgroundColor: "#38c983",
+                      padding: "0.5rem",
+                      maxWidth: "2rem",
+                      marginTop: "0.5rem",
+                      borderRadius: "30px",
+                      alignItems: "center",
+                      display: "flex",
+                    }}
+                  >
+                    <MdFileDownload
+                      style={{
+                        color: "#ffffff",
+                      }}
+                    />
+                  </div>
+                </td>
+              </tr>
+            ))}
+>>>>>>> 38a4648067c2c62bee5a1065b3351439f3f529c3
           </tbody>
         </StyledTable>
       </Caseswrapper>
@@ -229,8 +315,8 @@ const Box = styled.div`
       font-size: 1.5rem;
     }
     a {
-      font-size: 1rem;
-      font-weight: 600;
+      font-size: 16;
+      // font-weight: 600;
     }
   }
 `;
