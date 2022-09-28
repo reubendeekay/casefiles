@@ -44,7 +44,6 @@ const ProfileCard = () => {
           </div>
           <div>
             <h3>{user.name}</h3>
-            <p>Administrator</p>
             <div>
               <FiMail />
               <span>{user.email}</span>
@@ -149,10 +148,10 @@ const LogOutButton = styled.button`
   cursor: pointer;
   outline: none;
   color: var(--sidebar-background);
-  background: var(--button);
+  background: #4269d4;
   box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.31), 0 2px 2px -2px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   &:hover {
-    background: #02a4af;
+    background: #002da7;
   }
 `;

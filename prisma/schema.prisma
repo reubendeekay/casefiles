@@ -15,7 +15,6 @@ model Category {
   name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Case      Case[]
 }
 
 model Court {
@@ -24,7 +23,6 @@ model Court {
   location  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Case      Case[]
 }
 
 model Judge {
@@ -33,28 +31,22 @@ model Judge {
   gender    Sex      @default(UNNAMED)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Case      Case[]
 }
 
 model Case {
-  id          String   @id @default(uuid())
-  caseNumber  String   @unique
-  caseName    String
-  caseDetails String
-  accused     String
-  plaintiff   String
-  caseFiles   Json
-  filingDate  DateTime
-  hearingDate DateTime
-  rulingDate  DateTime
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  categoryId  String
-  courtId     String
-  judgeId     String
-  category    Category @relation(fields: [categoryId], references: [id])
-  court       Court    @relation(fields: [courtId], references: [id])
-  judge       Judge    @relation(fields: [judgeId], references: [id])
+  id              String   @id @default(uuid())
+  caseNumber      String   @unique
+  caseSubject     String
+  caseDescription String
+  accused         String
+  plaintiff       String
+  caseFiles       Json
+  caseContent     Json
+  judgeId         Json
+  filingDate      DateTime
+  hearingDate     DateTime
+  rulingDate      DateTime
+  createdAt       DateTime @default(now())
 }
 
 model User {
