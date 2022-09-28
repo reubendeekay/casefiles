@@ -70,7 +70,10 @@ const Nav = () => {
             objectFit={"cover"}
             onClick={() => setAccount(!account)}
           />
-          <h3>| Hi, {user.nickname}</h3>
+          <h3 style={{
+            fontSize: "0.9rem",
+            padding: "0rem 0.8rem",
+          }}>| Hi, {user.nickname}</h3>
         </Userprofile>
       ) : (
         <Authdiv>
