@@ -1,7 +1,6 @@
 import Filter from "../../components/Filter";
 import styled from "styled-components";
 import { StyledTable } from "../../styles/casesStyles";
-import Image from "next/image";
 import { supabase } from "../../lib/supabase";
 import { useUser } from "@auth0/nextjs-auth0";
 import Link from "next/link";
@@ -95,21 +94,6 @@ const Index = ({ cases }) => {
                         .replace("-", "/")}
                     </span>
                   </h3>
-                  {/* <h3
-                    style={{
-                      fontWeight: "400",
-                      fontSize: "1rem",
-                      padding: "0.1rem",
-                      backgroundColor: "#f5a6b6",
-                      color: "#d61326",
-                      borderRadius: "5px",
-                      maxWidth: "6rem",
-                      textAlign: "center",
-                      marginTop: "0.5rem",
-                    }}
-                  >
-                    pending
-                  </h3> */}
                   <div
                     style={{
                       backgroundColor: "#38c983",
