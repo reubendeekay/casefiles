@@ -12,7 +12,7 @@ export default async function handleUpload(req, res) {
   if (!files) {
     return res.status(500).json({ message: "No data provided" });
   }
-  const content = files.content.split(" ");
+  const content = files.content.split(/[,]+/).filter(Boolean).map((element) => element.trim());
   try {
     const { data, error } = await supabase.from("Case").insert([
       {
@@ -23,7 +23,7 @@ export default async function handleUpload(req, res) {
         accused: files.accused,
         plaintiff: files.plaintiff,
         caseFiles: Object.assign({}, files.caseFiles),
-        caseContent: Object.assign({}, content),
+        caseContent: content,
         judgeId: Object.assign({}, files.judge),
         filingDate: files.filingDate,
         hearingDate: files.hearingDate,

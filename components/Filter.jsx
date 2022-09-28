@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import {
   Container,
@@ -12,12 +11,10 @@ import { FiX } from "react-icons/fi";
 import { useStateContext } from "../lib/context";
 import toast, { Toaster } from "react-hot-toast";
 
-
 const Filter = () => {
-  const { setFilter, setFilteredCases, setUsedFilter } = useStateContext();
+  const { setFilter, setFilteredCases, setUsedFilter, filteredCases } =
+    useStateContext();
   const filterRef = useRef();
-
-
 
   const {
     register,
@@ -27,13 +24,13 @@ const Filter = () => {
   } = useForm();
 
   const onSubmit = (data) => {
+    // toast.loading("Filtering cases...");
     const cases = {
       caseNumber: data.caseNumber,
       caseName: data.caseName,
       caseContent: data.caseContent,
       parties: data.parties,
       judge: parseInt(data.judge),
-      court: parseInt(data.court),
       filingDate: data.filingDate,
       rulingDate: data.rulingDate,
     };
@@ -44,21 +41,26 @@ const Filter = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.length === 0) {
-          toast.error("Ooops no cases found");
+        if (data.length === 0 || Object.keys(data).length === 0) {
+          return toast.error("Ooops no cases found");
         }
         setFilteredCases(data);
         setUsedFilter(true);
+        toast.success("Cases found");
       })
       .catch((err) => toast.error("Ooops an error occured"));
   };
 
   return (
     <Container ref={filterRef}>
-      <h1 style={
-        //Add padding top to the h1
-        { paddingTop: "1.2rem" }
-      }>Search Decision</h1>
+      <h1
+        style={
+          //Add padding top to the h1
+          { paddingTop: "1.2rem" }
+        }
+      >
+        Search Decision
+      </h1>
       <Styledform onSubmit={handleSubmit(onSubmit)}>
         <Styledinput>
           <label>Application Number</label>
@@ -66,7 +68,7 @@ const Filter = () => {
         </Styledinput>
         <Styledinput>
           <label>Case Content</label>
-          <input type="text" {...register("caseName")} />
+          <input type="text" {...register("caseContent")} />
         </Styledinput>
         <Styledinput>
           <label>Party Names</label>

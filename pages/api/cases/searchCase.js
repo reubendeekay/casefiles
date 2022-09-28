@@ -7,17 +7,20 @@ export default async function handleSearch(req, res) {
       .status(405)
       .json({ message: `HTTP method ${req.method} is not supported.` });
   }
-  const { caseNumber } = req.body;
-  if (!caseNumber) {
+  const filteredCases = req.body;
+  filteredCases.parties ? null : (filteredCases.parties = "");
+  if (!filteredCases) {
     return res.status(500).json({ message: "No data provided" });
   }
   try {
     const { data, error } = await supabase
       .from("Case")
       .select("*")
-      .eq("caseNumber", caseNumber);
+      .eq("caseNumber", filteredCases.caseNumber)
+      .ilike("plaintiff", `%${filteredCases.parties}%`)
+      .eq("rulingDate", filteredCases.rulingDate);
     if (error) {
-      throw new Error("Unable to upload document to storage");
+      throw new Error("Unable to search for cases");
     }
     res.status(200).json(data);
   } catch (error) {

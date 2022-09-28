@@ -41,7 +41,7 @@ model Case {
   accused         String
   plaintiff       String
   caseFiles       Json
-  caseContent     Json
+  caseContent     String[]
   judgeId         Json
   filingDate      DateTime
   hearingDate     DateTime

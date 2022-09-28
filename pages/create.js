@@ -266,8 +266,7 @@ const Create = ({ judges }) => {
             </Styledtagcontainer>
             <Styledinput>
               <label>Decision Content*</label>
-              <input type="text" {...register("content", { required: true })} />
-              {errors.plaintiff && <div>This field is required</div>}
+              <input type="text" {...register("content")} />
             </Styledinput>
             <Styledinput>
               <label>Filing date</label>
