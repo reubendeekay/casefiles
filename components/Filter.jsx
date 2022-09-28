@@ -12,9 +12,12 @@ import { FiX } from "react-icons/fi";
 import { useStateContext } from "../lib/context";
 import toast, { Toaster } from "react-hot-toast";
 
+
 const Filter = () => {
   const { setFilter, setFilteredCases, setUsedFilter } = useStateContext();
   const filterRef = useRef();
+
+
 
   const {
     register,

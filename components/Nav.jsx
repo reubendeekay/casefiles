@@ -40,18 +40,16 @@ const Nav = () => {
           <li onClick={() => router.push("/cases")}>Decisions</li>
           <Dropdown>
             <span
-              style={{ display: "flex", alignItems: "center", gap: "0.3rem", }}
+              style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}
             >
               PRA Law Reports <FiChevronDown />
             </span>
-            {/* <li> */}
-              <ul>
-                <li>2010-2015</li>
-                <li>2016-2017</li>
-                <li>2018-2020</li>
-                <li>2021-2022</li>
-              </ul>
-            {/* </li> */}
+            <ul>
+              <li>2010-2015</li>
+              <li>2016-2017</li>
+              <li>2018-2020</li>
+              <li>2021-2022</li>
+            </ul>
           </Dropdown>
         </ul>
       </Navlinks>

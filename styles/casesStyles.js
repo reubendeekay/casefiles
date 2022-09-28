@@ -132,6 +132,7 @@ const StyledTable = styled.table`
           font-weight: 700;
           font-size: 1rem;
           color: var(--text-secondary);
+          line-height: 2;
           span {
             margin-left: 1rem;
             font-weight: 500;

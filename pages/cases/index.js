@@ -8,11 +8,12 @@ import Link from "next/link";
 import { FiPlusCircle, FiUser, FiFile } from "react-icons/fi";
 
 const Index = ({ cases }) => {
-  const { user, error, isLoading } = useUser();
+  console.log(cases);
+  const { user } = useUser();
   return (
     <Container>
       <FilterWrapper>
-        <Filter />
+        <Filter judges={cases} />
       </FilterWrapper>
       <Caseswrapper>
         {user && (
@@ -46,39 +47,60 @@ const Index = ({ cases }) => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                {/* <Image
-                  src="/patent-law.jpg"
-                  alt="patent-law"
-                  width="100"
-                  height="100"
-                  style={{ borderRadius: "20px" }}
-                /> */}
-                <h3>
-                  Case No:<span>CSR-001</span>
-                </h3>
-                <h3>
-                  Filing Date:<span>28th june 2022</span>
-                </h3>
-              </td>
-              <td>Just some random data in here</td>
-              <td>More Random data about the case</td>
-            </tr>
-            <tr>
-              <td>
-                <Image
-                  src="/court-session.jpg"
-                  alt="patent-law"
-                  width="100"
-                  height="100"
-                  objectFit="cover"
-                  style={{ borderRadius: "20px" }}
-                />
-              </td>
-              <td>Just some random data in here</td>
-              <td>More Random data about the case</td>
-            </tr>
+            {cases.map((caseItem, index) => (
+              <tr key={index}>
+                <td>
+                  <h3>
+                    Application No:<span>{caseItem.caseNumber}</span>
+                  </h3>
+                  <h3>
+                    Case Subject:<span>{caseItem.caseSubject}</span>
+                  </h3>
+                </td>
+                <td>
+                  <h3>
+                    Plaintiff:<span>{caseItem.plaintiff}</span>
+                  </h3>
+                  <h3>
+                    Accused:<span>{caseItem.accused}</span>
+                  </h3>
+                  <h3>
+                    Chairs:
+                    <span>
+                      {Object.keys(caseItem.judgeId).map((key) => (
+                        <span key={key}>{caseItem.judgeId[key]}</span>
+                      ))}
+                    </span>
+                  </h3>
+                </td>
+                <td>
+                  <h3>
+                    Date Delivered:
+                    <span>
+                      {new Date(caseItem.createdAt)
+                        .toISOString()
+                        .slice(0, 19)
+                        .replace("T", " ")}
+                    </span>
+                  </h3>
+                  <h3
+                    style={{
+                      fontWeight: "400",
+                      fontSize: "1rem",
+                      padding: "0.1rem",
+                      backgroundColor: "#f5a6b6",
+                      color: "#d61326",
+                      borderRadius: "5px",
+                      maxWidth: "6rem",
+                      textAlign: "center",
+                      marginTop: "0.5rem",
+                    }}
+                  >
+                    pending
+                  </h3>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </StyledTable>
       </Caseswrapper>
@@ -88,9 +110,22 @@ const Index = ({ cases }) => {
 
 export async function getServerSideProps() {
   const { data: cases, error } = await supabase.from("Case").select("*");
+  const finalCases = [];
+
+  for (const item of cases) {
+    const judgeNames = [];
+    for (const [key, value] of Object.entries(item.judgeId)) {
+      const { data: judge, error } = await supabase
+        .from("Judge")
+        .select("name")
+        .eq("id", value);
+      judgeNames.push(judge[0].name);
+    }
+    finalCases.push({ ...item, judgeId: judgeNames });
+  }
   return {
     props: {
-      cases,
+      cases: finalCases,
     },
   };
 }
