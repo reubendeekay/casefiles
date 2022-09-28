@@ -23,7 +23,6 @@ const Nav = () => {
       <Navlinks>
         <ul>
           <li onClick={() => router.push("/")}>Home</li>
-<<<<<<< HEAD
           <Dropdown>
             <span
               style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}
@@ -54,34 +53,6 @@ const Nav = () => {
               </ul>
             {/* </li> */}
           </Dropdown>
-=======
-          <li>Statutes</li>
-          <li
-            onClick={() =>
-              user
-                ? router.push("/cases")
-                : toast.error("You need to login to view the cases")
-            }
-            style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}
-          >
-            Decisions
-            <FiChevronDown />
-          </li>
-
-          <li>Courts</li>
-          <li
-            onClick={() =>
-              user
-                ? router.push("/create")
-                : toast.error("You need to login to view the cases")
-            }
-          >
-            Add Case
-          </li>
-
-          <li>PRA Law Reports</li>
-
->>>>>>> 3ec35479755f47108be448cbe92ef57680ac5d1b
         </ul>
       </Navlinks>
       {user ? (
@@ -150,9 +121,9 @@ const Navlinks = styled.div`
       font-weight: 400;
       cursor: pointer;
     }
-  }
-  @media (max-width: 768px) {
-    display: none;
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 `;
 
@@ -200,5 +171,34 @@ const Userprofile = styled.div`
   img {
     border-radius: 50%;
     cursor: pointer;
+  }
+`;
+
+const Dropdown = styled.li`
+  &:hover,
+  &:focus {
+    ul {
+      display: flex;
+    }
+  }
+  ul {
+    position: absolute;
+    margin: 0;
+    z-index: 5;
+    flex-direction: column;
+    gap: 0.2rem;
+    background: #fffafa;
+    border: 2px solid #5b5757;
+    display: none;
+  }
+  li {
+    list-style: none;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    text-transform: uppercase;
   }
 `;
