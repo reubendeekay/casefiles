@@ -138,7 +138,7 @@ const Create = ({ judges }) => {
         <FormWrapper>
           <Maindiv>
             <Styledinput>
-              <label>Case Number*</label>
+              <label>Application Number*</label>
               <input
                 type="text"
                 {...register("caseNumber", { required: true })}
@@ -146,7 +146,7 @@ const Create = ({ judges }) => {
               {errors.caseNumber && <div>This field is required</div>}
             </Styledinput>
             <Styledinput>
-              <label>Case Subject*</label>
+              <label>Subject Matter*</label>
               <input
                 type="text"
                 {...register("caseSubject", { required: true })}
@@ -167,7 +167,7 @@ const Create = ({ judges }) => {
               {errors.plaintiff && <div>This field is required</div>}
             </Styledinput>
             <StyledTextArea>
-              <label>Case Description*</label>
+              <label>Subject Description*</label>
               <br />
               <textarea {...register("description", { required: true })} />
               {errors.description && <div>This field is required</div>}
@@ -265,7 +265,7 @@ const Create = ({ judges }) => {
               </StyledTags>
             </Styledtagcontainer>
             <Styledinput>
-              <label>Case Content*</label>
+              <label>Decision Content*</label>
               <input type="text" {...register("content", { required: true })} />
               {errors.plaintiff && <div>This field is required</div>}
             </Styledinput>
@@ -316,34 +316,22 @@ export const getServerSideProps = withPageAuthRequired({
       },
     });
 
-    if (user.role !== "ADMIN") {
-      return {
-        redirect: {
-          permanent: false,
-          destination: "/403",
-        },
-        props: {},
-      };
-    }
+    // if (user.role !== "ADMIN") {
+    //   return {
+    //     redirect: {
+    //       permanent: false,
+    //       destination: "/403",
+    //     },
+    //     props: {},
+    //   };
+    // }
 
-<<<<<<< HEAD
-  // if (user.role !== "ADMIN") {
-  //   return {
-  //     redirect: {
-  //       permanent: false,
-  //       destination: "/403",
-  //     },
-  //     props: {},
-  //   };
-  // }
-=======
     const judges = await prisma.judge.findMany({
       select: {
         id: true,
         name: true,
       },
     });
->>>>>>> c3052a4e780b17ba402cc1c46dbda33d20da2c58
 
     return {
       props: { judges },

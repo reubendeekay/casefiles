@@ -35,7 +35,7 @@ const Nav = () => {
             Decisions
             <FiChevronDown />
           </li>
-<<<<<<< HEAD
+
           <li>Courts</li>
           <li
             onClick={() =>
@@ -46,9 +46,9 @@ const Nav = () => {
           >
             Add Case
           </li>
-=======
+
           <li>PRA Law Reports</li>
->>>>>>> c81bac3f2d772ae22a2880b05a3f7e1e7190ba8a
+
         </ul>
       </Navlinks>
       {user ? (
