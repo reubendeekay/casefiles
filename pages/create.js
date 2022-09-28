@@ -13,23 +13,45 @@ import {
   StyledButton,
   StyledDropdown,
   Styledinput,
+  StyledTextArea,
+  Styledtagcontainer,
+  BackgroundWrapper,
+  StyledTags,
 } from "../styles/createStyles";
-import Quill from "../components/Quill";
 import { MdCancel } from "react-icons/md";
-import { getSession } from "@auth0/nextjs-auth0";
+import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
 import prisma from "../lib/prisma";
 import toast from "react-hot-toast";
+import { FiX } from "react-icons/fi";
+import { useRouter } from "next/router";
 
-const Create = () => {
-  const { value } = useStateContext();
+const Create = ({ judges }) => {
   const hiddenFileInput = useRef(null);
   const [name, setName] = useState([]);
   const [file, setFile] = useState([]);
   const [fileUrl, setFileUrl] = useState([]);
+  const [tags, setTags] = useState([]);
+  const [chairId, setChairId] = useState([]);
+  const router = useRouter();
 
   const removeFile = (index) => {
     const newFiles = file.filter((image, i) => i !== index);
     setFile(newFiles);
+  };
+
+  const addTag = (e) => {
+    judges.filter((judge) => {
+      if (judge.id === e.target.value) {
+        setTags([...tags, judge.name]);
+        setChairId([...chairId, judge.id]);
+      }
+    });
+  };
+  const removeTag = (index) => {
+    const newTags = tags.filter((tag, i) => i !== index);
+    setTags(newTags);
+    const newChairId = chairId.filter((tag, i) => i !== index);
+    setChairId(newChairId);
   };
 
   const handleChange = (e) => {
@@ -67,29 +89,51 @@ const Create = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    // if (fileUrl.length === 0) {
-    //   return toast.error("Please upload a document before adding the case");
-    // }
+    if (fileUrl.length === 0) {
+      return toast.error("Please upload a document before adding the case");
+    }
+    if (tags.length === 0) {
+      return toast.error("Please add at least one chair");
+    }
     const caseData = {
       accused: data.accused,
-      caseName: data.caseName,
+      caseSubject: data.caseSubject,
       caseNumber: data.caseNumber,
-      caseDescription: value,
-      category: parseInt(data.category),
-      court: parseInt(data.court),
+      caseDescription: data.description,
+      content: data.content,
       filingDate: data.filingDate,
       hearingDate: data.hearingDate,
-      judge: parseInt(data.judge),
+      judge: chairId,
       plaintiff: data.plaintiff,
       rulingDate: data.rulingDate,
       caseFiles: fileUrl,
     };
-    console.log(caseData);
-    reset();
+    let toastId;
+    try {
+      toastId = toast.loading("Adding case...");
+      fetch("/api/cases/upload", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(caseData),
+      }).then((res) => {
+        if (res.status === 200) {
+          toast.success("Case added successfully🎉", { id: toastId });
+          reset();
+          router.push("/cases");
+        } else {
+          toast.error("Unable to add case", { id: toastId });
+        }
+      });
+    } catch (error) {
+      toast.error("Unable to add case", { id: toastId });
+    }
   };
 
   return (
     <Container>
+      <BackgroundWrapper>
+        <h1>ADD A NEW CASE</h1>
+      </BackgroundWrapper>
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormWrapper>
           <Maindiv>
@@ -102,10 +146,10 @@ const Create = () => {
               {errors.caseNumber && <div>This field is required</div>}
             </Styledinput>
             <Styledinput>
-              <label>Case Name*</label>
+              <label>Case Subject*</label>
               <input
                 type="text"
-                {...register("caseName", { required: true })}
+                {...register("caseSubject", { required: true })}
               />
               {errors.caseName && <div>This field is required</div>}
             </Styledinput>
@@ -122,19 +166,12 @@ const Create = () => {
               />
               {errors.plaintiff && <div>This field is required</div>}
             </Styledinput>
-            <div>
-              <p
-                style={{
-                  marginTop: "1rem",
-                  fontWeight: "500",
-                  fontSize: "1rem",
-                  color: "var(--text-secondary)",
-                }}
-              >
-                Case Description
-              </p>
-              <Quill />
-            </div>
+            <StyledTextArea>
+              <label>Case Description*</label>
+              <br />
+              <textarea {...register("description", { required: true })} />
+              {errors.description && <div>This field is required</div>}
+            </StyledTextArea>
             <StyledImage onClick={() => hiddenFileInput.current.click()}>
               <div>
                 <Image
@@ -185,10 +222,19 @@ const Create = () => {
                     setFile([]);
                     setName([]);
                   }}
+                  style={{ cursor: "pointer" }}
                 >
                   Remove all
                 </button>
-                <button type="button" onClick={() => uploadFiles()}>
+                <button
+                  type="button"
+                  onClick={() => uploadFiles()}
+                  style={{
+                    color: "white",
+                    background: "#4269d4",
+                    cursor: "pointer",
+                  }}
+                >
                   Upload Files
                 </button>
               </StyledUpload>
@@ -198,35 +244,31 @@ const Create = () => {
             )}
           </Maindiv>
           <Secondarydiv>
-            <StyledDropdown>
-              <label>Judge</label>
-              <select {...register("judge")}>
-                <option value="1">John Doe</option>
-                <option value="2">Jane Doe</option>
-              </select>
-            </StyledDropdown>
-            <StyledDropdown>
-              <label>Court</label>
-              <select {...register("court")}>
-                <option value="1">Supreme Court</option>
-                <option value="2">Court Of Appeal</option>
-                <option value="3">High court</option>
-                <option value="4">Environmnetal and Land Court</option>
-                <option value="5">Employment and Labour Relations court</option>
-              </select>
-            </StyledDropdown>
-            <StyledDropdown>
-              <label>Case Category</label>
-              <select {...register("category")}>
-                <option value="1">Criminal Case</option>
-                <option value="2">Civil Case</option>
-                <option value="3">Family Case</option>
-                <option value="4">Testing Case</option>
-                <option value="5">Land Registration</option>
-                <option value="6">Immigration</option>
-                <option value="7">Administrative Case</option>
-              </select>
-            </StyledDropdown>
+            <Styledtagcontainer>
+              <label>Chair</label>
+              <StyledTags>
+                {tags.length > 0 &&
+                  tags.map((tag, index) => (
+                    <div key={index}>
+                      <span>{tag}</span>
+                      <FiX onClick={() => removeTag(index)} />
+                    </div>
+                  ))}
+                <select onChange={addTag}>
+                  <option>Select Chair</option>
+                  {judges.map((judge) => (
+                    <option key={judge.id} value={judge.id}>
+                      {judge.name}
+                    </option>
+                  ))}
+                </select>
+              </StyledTags>
+            </Styledtagcontainer>
+            <Styledinput>
+              <label>Case Content*</label>
+              <input type="text" {...register("content", { required: true })} />
+              {errors.plaintiff && <div>This field is required</div>}
+            </Styledinput>
             <Styledinput>
               <label>Filing date</label>
               <input
@@ -261,40 +303,38 @@ const Create = () => {
 
 export default Create;
 
-export const getServerSideProps = async ({ req, res }) => {
-  const session = getSession(req, res);
-
-  if (!session) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: "/api/auth/login",
+export const getServerSideProps = withPageAuthRequired({
+  async getServerSideProps(context) {
+    const session = getSession(context.req, context.res);
+    const user = await prisma.user.findUnique({
+      select: {
+        email: true,
+        role: true,
       },
-      props: {},
-    };
-  }
-
-  const user = await prisma.user.findUnique({
-    select: {
-      email: true,
-      role: true,
-    },
-    where: {
-      email: session.user.email,
-    },
-  });
-
-  if (user.role !== "ADMIN") {
-    return {
-      redirect: {
-        permanent: false,
-        destination: "/403",
+      where: {
+        email: session.user.email,
       },
-      props: {},
-    };
-  }
+    });
 
-  return {
-    props: {},
-  };
-};
+    if (user.role !== "ADMIN") {
+      return {
+        redirect: {
+          permanent: false,
+          destination: "/403",
+        },
+        props: {},
+      };
+    }
+
+    const judges = await prisma.judge.findMany({
+      select: {
+        id: true,
+        name: true,
+      },
+    });
+
+    return {
+      props: { judges },
+    };
+  },
+});

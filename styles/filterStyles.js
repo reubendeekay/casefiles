@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Container = styled.div`
   box-shadow: rgb(0 0 0 / 31%) 0px 0px 1px 0px,
     rgb(0 0 0 / 25%) 0px 11px 20px -8px;
-    height: 100vh;
+  height: 100vh;
   h1 {
     font-size: 1.5rem;
     font-weight: 600;
@@ -103,13 +103,13 @@ const StyledDropdown = styled.div`
 const StyledButton = styled.button`
   width: 100%;
   margin: 1rem 0rem;
-  padding: 0.6rem;
+  padding: 1.2rem 0.6rem;
   outline: none;
   border: none;
   border-radius: 10px;
   font-size: 1rem;
   color: white;
-  background: var(--button);
+  background: #4269d4;
   box-shadow: rgb(28 202 255 / 24%) 0px 8px 16px 0px;
   cursor: pointer;
 `;

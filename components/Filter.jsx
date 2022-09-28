@@ -47,7 +47,7 @@ const Filter = () => {
         setFilteredCases(data);
         setUsedFilter(true);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("Ooops an error occured😢"));
   };
 
   return (

@@ -8,6 +8,7 @@ const FormWrapper = styled.div`
   display: flex;
   margin: 1rem 2rem;
   gap: 2rem;
+  flex-wrap: nowrap;
   @media (max-width: 768px) {
     flex-direction: column;
     margin: 1rem;
@@ -19,6 +20,7 @@ const Maindiv = styled.div`
   padding: 24px;
   flex-grow: 2;
   border-radius: 16px;
+  flex-basis: 50%;
 `;
 
 const Secondarydiv = styled(Maindiv)`
@@ -33,7 +35,7 @@ const StyledImage = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 2rem;
-  border: 1px dashed var(--line-border);
+  border: 3px dashed var(--line-border);
   padding: 1rem;
   background: #f9f9f9;
   cursor: pointer;
@@ -103,19 +105,18 @@ const Preview = styled.div`
 const StyledButton = styled.button`
   width: 100%;
   margin: 1rem 0rem;
-  padding: 0.6rem;
+  padding: 1.2rem 0.6rem;
   outline: none;
   border: none;
   border-radius: 10px;
   font-size: 1rem;
   color: white;
-  background: var(--button);
+  background: #4269d4;
   box-shadow: rgb(28 202 255 / 24%) 0px 8px 16px 0px;
   cursor: pointer;
 `;
 
 const Styledinput = styled.div`
-  position: relative;
   label {
     position: relative;
     top: 10px;
@@ -125,9 +126,6 @@ const Styledinput = styled.div`
     color: black;
     pointer-events: none;
     background: white;
-    &:focus {
-      color: #1ccaff;
-    }
   }
   input {
     width: 100%;
@@ -135,18 +133,96 @@ const Styledinput = styled.div`
     font-size: 1rem;
     margin-bottom: 10px;
     border: none;
-    border: 1px solid var(--line-border);
+    border: 3px solid var(--line-border);
     color: var(--text-secondary);
-    border-radius: 10px;
     outline: none;
     &:focus {
-      border: 1px solid #1ccaff;
+      border: 3px solid #1ccaff;
     }
   }
   div {
     margin-top: -0.7rem;
     color: var(--loss);
     padding: 0px 15px;
+  }
+`;
+const StyledTextArea = styled.div`
+  margin-bottom: 1rem;
+  textarea {
+    width: 100%;
+    min-height: 5rem;
+    padding: 1rem;
+    font-size: 1rem;
+    border: 3px solid var(--line-border);
+    &:focus {
+      border: 3px solid #1ccaff;
+      outline: none;
+    }
+  }
+  label {
+    position: relative;
+    top: 10px;
+    left: 15px;
+    background: white;
+    padding: 5px;
+    z-index: 10;
+  }
+  div {
+    color: var(--loss);
+    padding: 0px 15px;
+  }
+`;
+
+const Styledtagcontainer = styled.div`
+  width: 100%;
+  border: 3px solid var(--line-border);
+  label {
+    position: relative;
+    top: -10px;
+    left: 15px;
+    background: white;
+    padding: 0px 5px;
+    z-index: 10;
+  }
+`;
+
+const StyledTags = styled.div`
+  position: relative;
+  top: -10px;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+  padding: 0px 15px;
+  gap: 0.5rem;
+  align-items: center;
+  div {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    background-color: #919eab29;
+    border-radius: 16px;
+    padding: 0px 10px;
+    height: 24px;
+    span {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      color: #212b36;
+    }
+    svg {
+      font-size: 1rem;
+      color: white;
+      cursor: pointer;
+      border-radius: 50%;
+      background: var(--text-secondary);
+    }
+  }
+  select {
+    outline: none;
+    border: none;
+    background: none;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    padding: 0.5rem;
   }
 `;
 
@@ -165,18 +241,33 @@ const StyledDropdown = styled.div`
     font-size: 1rem;
     margin-bottom: 20px;
     border: none;
-    border: 1px solid var(--line-border);
+    border: 3px solid var(--line-border);
     color: var(--text-secondary);
-    border-radius: 10px;
     outline: none;
     background: none;
     &:focus {
-      border: 2px solid #1ccaff;
+      border: 3px solid #1ccaff;
       color: #1ccaff;
     }
   }
 `;
-
+const BackgroundWrapper = styled.div`
+  background-image: linear-gradient(
+    109.6deg,
+    rgba(45, 116, 213, 0.85) 11.2%,
+    rgba(121, 137, 212, 0.85) 91.2%
+  );
+  min-height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  h1 {
+    text-align: center;
+    font-size: 1.25rem;
+    padding: 1rem;
+    color: white;
+  }
+`;
 export {
   Container,
   FormWrapper,
@@ -188,4 +279,8 @@ export {
   StyledButton,
   Styledinput,
   StyledDropdown,
+  StyledTextArea,
+  BackgroundWrapper,
+  Styledtagcontainer,
+  StyledTags,
 };
