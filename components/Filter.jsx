@@ -42,24 +42,27 @@ const Filter = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.length === 0) {
-          toast.error("Ooops no cases found😢");
+          toast.error("Ooops no cases found");
         }
         setFilteredCases(data);
         setUsedFilter(true);
       })
-      .catch((err) => toast.error("Ooops an error occured😢"));
+      .catch((err) => toast.error("Ooops an error occured"));
   };
 
   return (
     <Container ref={filterRef}>
-      <h1>Filter Case</h1>
+      <h1 style={
+        //Add padding top to the h1
+        { paddingTop: "1.2rem" }
+      }>Search Decision</h1>
       <Styledform onSubmit={handleSubmit(onSubmit)}>
         <Styledinput>
           <label>Application Number</label>
           <input type="text" {...register("caseNumber")} />
         </Styledinput>
         <Styledinput>
-          <label>Case Name</label>
+          <label>Case Content</label>
           <input type="text" {...register("caseName")} />
         </Styledinput>
         <Styledinput>

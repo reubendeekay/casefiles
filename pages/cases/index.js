@@ -5,7 +5,7 @@ import Image from "next/image";
 import { supabase } from "../../lib/supabase";
 import { useUser } from "@auth0/nextjs-auth0";
 import Link from "next/link";
-import { FiPlusCircle } from "react-icons/fi";
+import { FiPlusCircle, FiUser, FiFile } from "react-icons/fi";
 
 const Index = ({ cases }) => {
   const { user, error, isLoading } = useUser();
@@ -19,13 +19,13 @@ const Index = ({ cases }) => {
           <Box>
             <Link href="/">
               <button>
-                <FiPlusCircle />
+                <FiUser />
                 <a>Add Judge</a>
               </button>
             </Link>
             <Link href="/">
               <button>
-                <FiPlusCircle />
+                <FiFile />
                 <a>Create Report</a>
               </button>
             </Link>
