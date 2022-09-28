@@ -19,7 +19,7 @@ export default function Home() {
             <p>
               We provide a wide array of case files from our database. Browse
               through our extensive library from the courtroom to your corner
-              office. ⭐️⭐️⭐️⭐️ Come take a peek....
+              office.
             </p>
           </div>
         </Infodiv>

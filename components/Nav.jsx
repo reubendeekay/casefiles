@@ -64,6 +64,27 @@ const Nav = () => {
               <li>2021-2022</li>
             </ul>
           </Dropdown>
+          {user && (
+            <Dropdown>
+              <span
+                style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}
+              >
+                Admin <FiChevronDown />
+              </span>
+              <ul style={
+                {
+                  padding: "0.8rem",
+                }
+              }>
+                <li onClick={() => router.push("/create")}>Add Case</li>
+                <li>Add Report</li>
+                <li>Add Judge</li>
+             
+              </ul>
+            </Dropdown>
+          ) 
+          }
+         
         </ul>
       </Navlinks>
       {user ? (
@@ -102,7 +123,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #f5f8fc;
+  background: white;
   padding: 0rem 1rem;
   position: sticky;
   top: 0px;
@@ -128,7 +149,7 @@ const Logo = styled.div`
 const Navlinks = styled.div`
   ul {
     display: flex;
-    gap: 5rem;
+    gap: 4rem;
 
     li {
       list-style: none;
