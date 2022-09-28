@@ -37,8 +37,8 @@ const ProfileCard = () => {
                 user.picture.includes(IMAGE_URL) ? user.picture : "/avatar.png"
               }
               alt="profile"
-              height={100}
-              width={100}
+              height={80}
+              width={80}
               objectFit={"cover"}
             />
           </div>
@@ -65,7 +65,7 @@ const Container = styled.div`
   top: 50px;
   right: 10px;
   z-index: 100;
-  background: white;
+  background: #edf4ff;
   max-width: 50vh;
   padding: 1rem 2rem;
   border-radius: 10px;

@@ -129,8 +129,8 @@ const StyledTable = styled.table`
         text-align: left;
         font-size: 1rem;
         h3 {
-          font-weight: 700;
-          font-size: 1rem;
+          font-weight: 600;
+          font-size: 0.85rem;
           color: var(--text-secondary);
           line-height: 2;
           span {

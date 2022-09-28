@@ -45,7 +45,7 @@ const Styledinput = styled.div`
     top: 10px;
     left: 15px;
     padding: 10px 5px;
-    font-size: 16px;
+    font-size: 0.85rem;
     color: black;
     pointer-events: none;
     background: white;
@@ -55,15 +55,15 @@ const Styledinput = styled.div`
   }
   input {
     width: 100%;
-    padding: 18px;
+    padding: 12px 15px;
     font-size: 1rem;
     margin-bottom: 10px;
     border: none;
-    border: 3px solid var(--line-border);
+    border: 1px solid var(--line-border);
     color: var(--text-secondary);
     outline: none;
     &:focus {
-      border: 2px solid #1ccaff;
+      border: 1px solid #000000;
     }
   }
   div {
@@ -84,18 +84,18 @@ const StyledDropdown = styled.div`
   }
   select {
     width: 100%;
-    padding: 15px;
+    padding: 12px 15px;
     font-size: 1rem;
     margin-bottom: 20px;
     border: none;
-    border: 3px solid var(--line-border);
+    border: 1px solid var(--line-border);
     color: var(--text-secondary);
     /* border-radius: 10px; */
     outline: none;
     background: none;
     &:focus {
-      border: 2px solid #1ccaff;
-      color: #1ccaff;
+      border: 1px solid #000000;
+      color: #000000;
     }
   }
 `;
@@ -103,11 +103,11 @@ const StyledDropdown = styled.div`
 const StyledButton = styled.button`
   width: 100%;
   margin: 1rem 0rem;
-  padding: 1.2rem 0.6rem;
+  padding: 0.9rem 0.6rem;
   outline: none;
   border: none;
-  border-radius: 10px;
-  font-size: 1rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
   color: white;
   background: #4269d4;
   box-shadow: rgb(28 202 255 / 24%) 0px 8px 16px 0px;
