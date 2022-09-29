@@ -1,7 +1,6 @@
 import Filter from "../../components/Filter";
 import styled from "styled-components";
 import { StyledTable } from "../../styles/casesStyles";
-import Image from "next/image";
 import { supabase } from "../../lib/supabase";
 import { useUser } from "@auth0/nextjs-auth0";
 import Link from "next/link";
@@ -54,6 +53,7 @@ const Index = ({ cases }) => {
             </tr>
           </thead>
           <tbody>
+
             {filteredCases.length > 0 &&
               filteredCases.map((caseItem, index) => (
                 <tr key={index}>
@@ -180,16 +180,7 @@ const Index = ({ cases }) => {
                     pending
                   </h3> */}
                     <div
-                      style={{
-                        backgroundColor: "#38c983",
-                        padding: "0.5rem",
-                        maxWidth: "2rem",
-                        marginTop: "0.5rem",
-                        borderRadius: "30px",
-                        alignItems: "center",
-                        display: "flex",
-                      }}
-                    >
+
                       <MdFileDownload
                         onClick={() => {
                           const {
