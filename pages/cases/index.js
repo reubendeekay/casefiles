@@ -7,16 +7,12 @@ import Link from "next/link";
 
 import { useStateContext } from "../../lib/context";
 
-import {
-  FiPlusCircle,
-  FiUser,
-  FiFile,
-  FiDownload,
-  FiDownloadCloud,
-} from "react-icons/fi";
 import { MdFileDownload } from "react-icons/md";
+import useDownloader from "react-use-downloader";
 
 const Index = ({ cases }) => {
+  console.log(cases[0]);
+
   const { user } = useUser();
   const { filteredCases } = useStateContext();
 
@@ -57,63 +53,157 @@ const Index = ({ cases }) => {
             </tr>
           </thead>
           <tbody>
-            {cases.map((caseItem, index) => (
-              <tr key={index}>
-                <td>
-                  <h3>
-                    Application No:<span>{caseItem.caseNumber}</span>
-                  </h3>
-                  <h3>
-                    Case Subject:<span>{caseItem.caseSubject}</span>
-                  </h3>
-                </td>
-                <td>
-                  <h3>
-                    Plaintiff:<span>{caseItem.plaintiff}</span>
-                  </h3>
-                  <h3>
-                    Accused:<span>{caseItem.accused}</span>
-                  </h3>
-                  <h3>
-                    Chairs:
-                    <span>
-                      {Object.keys(caseItem.judgeId)
-                        .map((key) => caseItem.judgeId[key])
-                        .join(" & ")}
-                    </span>
-                  </h3>
-                </td>
-                <td>
-                  <h3>
-                    Delivery Date:
-                    <span>
-                      {new Date(caseItem.createdAt)
-                        .toISOString()
-                        .slice(0, 11)
-                        .replace("T", " ")
-                        .replace("-", "/")}
-                    </span>
-                  </h3>
-                  <div
+
+            {filteredCases.length > 0 &&
+              filteredCases.map((caseItem, index) => (
+                <tr key={index}>
+                  <td>
+                    <h3>
+                      Application No:<span>{caseItem.caseNumber}</span>
+                    </h3>
+                    <h3>
+                      Case Subject:<span>{caseItem.caseSubject}</span>
+                    </h3>
+                  </td>
+                  <td style={{ maxWidth: "30rem" }}>
+                    <h3>
+                      Plaintiff:<span>{caseItem.plaintiff}</span>
+                    </h3>
+                    <h3>
+                      Accused:<span>{caseItem.accused}</span>
+                    </h3>
+                    <h3>
+                      Chairs:
+                      <span>
+                        {Object.keys(caseItem.judgeId).map((key) => (
+                          <span key={key}>{caseItem.judgeId[key]}&</span>
+                        ))}
+                      </span>
+                    </h3>
+                  </td>
+                  <td>
+                    <h3>
+                      Date Delivered:
+                      <span>
+                        {new Date(caseItem.createdAt)
+                          .toISOString()
+                          .slice(0, 10)
+                          .replace("T", " ")}
+                      </span>
+                    </h3>
+                    <div
+                      style={{
+                        backgroundColor: "#38c983",
+                        padding: "0.5rem",
+                        maxWidth: "2rem",
+                        marginTop: "0.5rem",
+                        borderRadius: "30px",
+                        alignItems: "center",
+                        display: "flex",
+                      }}
+                    >
+                      <MdFileDownload
+                        onClick={() => {
+                          const {
+                            size,
+                            elapsed,
+                            percentage,
+                            download,
+                            cancel,
+                            error,
+                            isInProgress,
+                          } = useDownloader();
+                          download(caseItem.caseFiles[0]).then((res) => {
+                            console.log(res);
+                          });
+                        }}
+                        style={{
+                          color: "#ffffff",
+                        }}
+                      />
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            {filteredCases.length === 0 &&
+              cases.map((caseItem, index) => (
+                <tr key={index}>
+                  <td>
+                    <h3>
+                      Application No:<span>{caseItem.caseNumber}</span>
+                    </h3>
+                    <h3>
+                      Case Subject:<span>{caseItem.caseSubject}</span>
+                    </h3>
+                  </td>
+                  <td>
+                    <h3>
+                      Plaintiff:<span>{caseItem.plaintiff}</span>
+                    </h3>
+                    <h3>
+                      Accused:<span>{caseItem.accused}</span>
+                    </h3>
+                    <h3>
+                      Chairs:
+                      <span>
+                        {Object.keys(caseItem.judgeId)
+                          .map((key) => caseItem.judgeId[key])
+                          .join(" & ")}
+                      </span>
+                    </h3>
+                  </td>
+                  <td>
+                    <h3>
+                      Delivery Date:
+                      <span>
+                        {new Date(caseItem.createdAt)
+                          .toISOString()
+                          .slice(0, 11)
+                          .replace("T", " ")
+                          .replace("-", "/")
+                          .replace("-", "/")}
+                      </span>
+                    </h3>
+                    {/* <h3
                     style={{
-                      backgroundColor: "#38c983",
-                      padding: "0.5rem",
-                      maxWidth: "2rem",
+                      fontWeight: "400",
+                      fontSize: "1rem",
+                      padding: "0.1rem",
+                      backgroundColor: "#f5a6b6",
+                      color: "#d61326",
+                      borderRadius: "5px",
+                      maxWidth: "6rem",
+                      textAlign: "center",
                       marginTop: "0.5rem",
-                      borderRadius: "30px",
-                      alignItems: "center",
-                      display: "flex",
                     }}
                   >
-                    <MdFileDownload
-                      style={{
-                        color: "#ffffff",
-                      }}
-                    />
-                  </div>
-                </td>
-              </tr>
-            ))}
+                    pending
+                  </h3> */}
+                    <div
+
+                      <MdFileDownload
+                        onClick={() => {
+                          const {
+                            size,
+                            elapsed,
+                            percentage,
+                            download,
+                            cancel,
+                            error,
+                            isInProgress,
+                          } = useDownloader();
+                          download(caseItem.caseFiles[0]).then((res) => {
+                            console.log(res);
+                          });
+                        }}
+                        style={{
+                          color: "#ffffff",
+                        }}
+                      />
+                    </div>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </StyledTable>
       </Caseswrapper>

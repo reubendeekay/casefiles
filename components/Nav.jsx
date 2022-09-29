@@ -39,11 +39,11 @@ const Nav = () => {
                 padding: "0.8rem",
               }
             }>
-              <li>Legal Notices</li>
-              <li>Ammendment Acts</li>
-              <li>The Constitution of Kenya</li>
-              <li>Laws of Kenya Database</li>
-              <li>FAQs</li>
+              
+          <a href='http://www.kenyalaw.org:8181/exist/kenyalex/actview.xql?actid=Const2010'> The Constitution of Kenya </a>
+          <a href='http://www.kenyalaw.org:8181/exist/kenyalex/actview.xql?actid=No.%2033%20of%202015'> The Public Procurement and Asset Disposal Act, 2015 </a>
+             
+
             </ul>
           </Dropdown>
           <li onClick={() => router.push("/cases")}>Decisions</li>
@@ -78,7 +78,7 @@ const Nav = () => {
               }>
                 <li onClick={() => router.push("/create")}>Add Case</li>
                 <li>Add Report</li>
-                <li>Add Judge</li>
+                <li>Add Chair</li>
              
               </ul>
             </Dropdown>
@@ -165,6 +165,25 @@ const Navlinks = styled.div`
       color: #4269d4;
 
     }
+    a {
+      list-style: none;
+      font-size: 1rem;
+      font-weight: 400;
+      cursor: pointer;
+      line-height: 2rem;
+    }
+    a:hover {
+      color: #4269d4;
+      font-weight: 700;
+      line-height: 2rem;
+
+    }
+    a:active {
+      color: #4269d4;
+
+      line-height: 2rem;
+
+    }
     @media (max-width: 768px) {
       display: none;
     }
@@ -173,13 +192,14 @@ const Navlinks = styled.div`
 
 const Authdiv = styled.div`
   button {
-    padding: 0.5rem 1rem;
+    padding: 0.65rem 2rem;
     border: none;
     border-radius: 30px;
     color: white;
     background: black;
     display: flex;
     gap: 0.5rem;
+    margin-top: 0.2rem;
     p {
       font-size: 1rem;
     }
