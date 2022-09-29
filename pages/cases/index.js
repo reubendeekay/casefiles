@@ -15,6 +15,8 @@ const Index = ({ cases }) => {
 
   const { user } = useUser();
   const { filteredCases } = useStateContext();
+  const { size, elapsed, percentage, download, cancel, error, isInProgress } =
+    useDownloader();
 
   return (
     <Container>
@@ -164,18 +166,19 @@ const Index = ({ cases }) => {
                       </span>
                     </h3>
 
-                    <div>
+                    <div
+                      style={{
+                        backgroundColor: "#38c983",
+                        padding: "0.5rem",
+                        maxWidth: "2rem",
+                        marginTop: "0.5rem",
+                        borderRadius: "30px",
+                        alignItems: "center",
+                        display: "flex",
+                      }}
+                    >
                       <MdFileDownload
                         onClick={() => {
-                          const {
-                            size,
-                            elapsed,
-                            percentage,
-                            download,
-                            cancel,
-                            error,
-                            isInProgress,
-                          } = useDownloader();
                           download(caseItem.caseFiles[0]).then((res) => {
                             console.log(res);
                           });
