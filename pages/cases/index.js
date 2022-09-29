@@ -53,7 +53,6 @@ const Index = ({ cases }) => {
             </tr>
           </thead>
           <tbody>
-
             {filteredCases.length > 0 &&
               filteredCases.map((caseItem, index) => (
                 <tr key={index}>
@@ -164,23 +163,8 @@ const Index = ({ cases }) => {
                           .replace("-", "/")}
                       </span>
                     </h3>
-                    {/* <h3
-                    style={{
-                      fontWeight: "400",
-                      fontSize: "1rem",
-                      padding: "0.1rem",
-                      backgroundColor: "#f5a6b6",
-                      color: "#d61326",
-                      borderRadius: "5px",
-                      maxWidth: "6rem",
-                      textAlign: "center",
-                      marginTop: "0.5rem",
-                    }}
-                  >
-                    pending
-                  </h3> */}
-                    <div
 
+                    <div>
                       <MdFileDownload
                         onClick={() => {
                           const {

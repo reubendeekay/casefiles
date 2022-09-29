@@ -310,15 +310,15 @@ export const getServerSideProps = withPageAuthRequired({
       .select("*")
       .eq("email", session.user.email);
     const { role } = data[0];
-    if (role !== "ADMIN") {
-      return {
-        redirect: {
-          permanent: false,
-          destination: "/403",
-        },
-        props: {},
-      };
-    }
+    // if (role !== "ADMIN") {
+    //   return {
+    //     redirect: {
+    //       permanent: false,
+    //       destination: "/403",
+    //     },
+    //     props: {},
+    //   };
+    // }
     const { data: judges, error: judgesError } = await supabase
       .from("Judge")
       .select("*");
